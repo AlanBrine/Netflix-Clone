@@ -9,6 +9,7 @@ export default function Home() {
     return( <>
         
         <Container>
+
   {categories.map( a => <Row key={a.name} title={a.title} path={a.path}/>)  }
 
     

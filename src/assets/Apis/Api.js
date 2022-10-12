@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import  axios from"axios"
+import axios from "axios"
 const apiKey = '5b5c37461ed945b3fd4159ce828bb7c6'
 
 export const categories = [
@@ -44,13 +44,9 @@ export const categories = [
 
 
 export function GetMovies(path) {
-   
-    
-    const [movie, setMovie] = useState([])
+  const [movie, setMovie] = useState([])
+ 
+  axios.get(`https://api.themoviedb.org/3${path}`).then(a => setMovie(a.data.results))
 
-    
-
-        axios.get(`https://api.themoviedb.org/3${path}`).then(a => setMovie(a.data.results))
-
-    return movie;
+  return movie;
 }

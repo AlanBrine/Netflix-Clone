@@ -5,8 +5,8 @@ export const Container = styled.div`
 
 
 font-family: 'Gotham ', sans-serif;
-color: ${colors.red
-};
+color: white;
+background-color: ${colors.black};
 
 
 `;
