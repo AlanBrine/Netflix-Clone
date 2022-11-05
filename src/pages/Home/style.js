@@ -7,6 +7,6 @@ export const Container = styled.div`
 font-family: 'Gotham ', sans-serif;
 color: white;
 background-color: ${colors.black};
-
+overflow: hidden;
 
 `;

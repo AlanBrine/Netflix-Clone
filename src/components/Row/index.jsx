@@ -1,46 +1,61 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { GetMovies } from "../../assets/Apis/Api";
-import { Container, Catalog, Card, Swipers} from "./styles";
-import { FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import { Container, Catalog, Swipers } from "./styles";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import ItemsRow from "../ItemsRow";
 
 function Row({ title, path }) {
-  const Swipe = useRef(null)
-  
-  const handlleRight = (e) => {
-    e.preventDefault()
-    console.log(Swipe.current.offsetWidth)
-    Swipe.current.scrollLeft += Swipe.current.offsetWidth
-  }
-  const handlleLeft = (e) => {
-    e.preventDefault()
-    console.log(Swipe.current.offsetWidth)
-    Swipe.current.scrollLeft -= Swipe.current.offsetWidth
-  }
+  const Swipe= useRef(null);
+  const Withd= useRef(null);
+  const [itemsNumber, setItemsNumber] = useState(0);
 
- 
- 
+  const handlleSwipe = (direction) => {
+    let slide = (26 * Withd.current.getBoundingClientRect().width/100 * 2.76)
+    let distance =  Swipe.current.getBoundingClientRect().x  
+    
+    if(direction === "left" && itemsNumber > 0) {
+      setItemsNumber(itemsNumber - 1);
+      Swipe.current.style.transform = `translateX(${ slide + distance }px)`;
+      console.log("foi")
+    }
+    if(direction === "right" && itemsNumber < 6) { 
+      setItemsNumber(itemsNumber + 1);
+      Swipe.current.style.transform = `translateX(${-slide + distance }px)`;
+    }
+    console.log(slide + distance)
+    console.log(distance)
+  };
+
   return (
     <>
-      <Container>
+      <Container ref={Withd}>
         <h2>{title}</h2>
+        <Swipers className="swipe">
+          <FaChevronRight
+            className={`icon right ${itemsNumber === 6 ?"visible": " "}`}
+            onClick={() => {
+              handlleSwipe("right");
+            }}
+          />
 
-        <Catalog ref={Swipe}>
-          {GetMovies(path).map((a) => (
-            <Card
-              key={a.id}
-              src={`https://image.tmdb.org/t/p/w500${a.backdrop_path}`}
-              alt={a.title}
-            />
-          ))}
+          <Catalog ref={Swipe}>
+            {GetMovies(path).map((a) => (
+              <ItemsRow
+                key={a.id}
+                img={a.backdrop_path}
+                title={a.title}
+                name={a.name}
+              />
+            ))}
+          </Catalog>
 
-<Swipers className="swipe">
-
-  <FaChevronLeft onClick={handlleLeft}/>
-
-  <FaChevronRight onClick={handlleRight}/>
-</Swipers>
-
-        </Catalog>
+          <FaChevronLeft
+            className={` ${itemsNumber === 0 ?"visible": " "}   icon left `}
+            onClick={() => {
+              handlleSwipe("left");
+            }}
+          />
+        </Swipers>
       </Container>
     </>
   );
