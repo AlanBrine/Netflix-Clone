@@ -3,88 +3,82 @@ import styled from 'styled-components';
 export const Container = styled.section`
   display: inline-block;
   flex-direction: column;
-  height: 20vh;
+  height: 17vh;
   position: relative;
   width: 100%;
   
  >h2{
-    margin:1rem 1rem;
+   font-size: 0.9rem;
+   margin:1rem;
  }
-  
+ @media screen and (min-width: 1024px){
+  height: 20vh;
+ }
+ >h2{
+  font-size: 1.5rem;
+ }
 `;
 
 export const Catalog = styled.div`
  display: flex;
  flex-wrap: nowrap;
  transition: all 1s ease;
- width: max-content;
+ width: 100%;
  overflow-x: scroll;
-
  padding-left:5vw ;
  scroll-behavior: smooth;
  scroll-snap-type:mandatory;
-
- @media screen and (min-width: 1024px){
-    &:hover .swipe{
-display:flex;
-   } 
-}
-
- &::-webkit-scrollbar{
+ 
+  &::-webkit-scrollbar{
     width: 0;
     height: 0;
-}
+  }
+  @media screen and (min-width: 1024px){
+   width: max-content;
 
-`
-
-export const Card = styled.img`
-height: 10vw;
-margin: 0 0.2em;
-float: 2;
-@media screen and (min-width: 1024px){
- &:hover{
-  transform: scale(1.5);
-    
-}   
-height: 100%;
-
-}
+  }
 
 `
 
 export const Swipers = styled.div`
-position:relative;
 
-.visible{
+.icon{
   display: none;
 }
 
+@media screen and (min-width: 1024px){
+
+position:relative;
+
+
 
 .icon{
-display: none;
-  font-size: 2em;
+   display: none;
+   font-size: 3vw;
    position: absolute;
    z-index: 99999;
-   background-color: rgba(0,0,0,.6);
    height: 100%;
-  top:0%;
-
+   top:0%;
 }
   .right{
-right: 0;
+   right: 0;
+   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 34%);
   }
   .left{
+    background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 34%);
+    left: 0;
+  }  
+   &:hover{
+   .visible{
+     display: none;
+     opacity: 0%;
+    }
 
-left: 0;
+   .right, .left{
+   display: block;
+   }
   }
-  
-  
-  
-  &:hover{
-
-.right, .left{
-  display: block;
-}}
+}
 
 
 

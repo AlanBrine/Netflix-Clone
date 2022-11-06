@@ -12,25 +12,23 @@ function Row({ title, path }) {
   const handlleSwipe = (direction) => {
     let slide = (26 * Withd.current.getBoundingClientRect().width/100 * 2.76)
     let distance =  Swipe.current.getBoundingClientRect().x  
-    
     if(direction === "left" && itemsNumber > 0) {
       setItemsNumber(itemsNumber - 1);
       Swipe.current.style.transform = `translateX(${ slide + distance }px)`;
       console.log("foi")
-    }
+    }else
     if(direction === "right" && itemsNumber < 6) { 
       setItemsNumber(itemsNumber + 1);
       Swipe.current.style.transform = `translateX(${-slide + distance }px)`;
     }
-    console.log(slide + distance)
-    console.log(distance)
+    
   };
 
   return (
     <>
       <Container ref={Withd}>
         <h2>{title}</h2>
-        <Swipers className="swipe">
+        <Swipers >
           <FaChevronRight
             className={`icon right ${itemsNumber === 6 ?"visible": " "}`}
             onClick={() => {
