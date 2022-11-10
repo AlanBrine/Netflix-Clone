@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container, InfoHover } from "./styles";
 
 function ItemsRow({ img, title, name }) {
-  
+ 
   const choseName = (title,name) =>{
     if(title === undefined){
         return name
@@ -15,12 +15,19 @@ function ItemsRow({ img, title, name }) {
   
     return (
     <>
-      <Container >
+      <Container 
+      
+       
+      
+      >
         <img
           src={`https://image.tmdb.org/t/p/w500${img}`}
-          alt="oi"
+          alt={choseName(title, name)}
         />
-        <InfoHover className="info">
+        <InfoHover className="info"
+      
+      
+        >
 <h3>
 
 {choseName(title, name)}

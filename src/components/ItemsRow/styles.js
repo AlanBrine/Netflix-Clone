@@ -1,59 +1,60 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
- // position: relative;
+
   margin-left: 1vw;
   cursor: pointer;
   display:flex;
   flex-direction: column;
-
- /*  &:hover{
- 
-   
-  width:36vw ;
   
-    z-index: 99;
-    
-    >img{
-        
- transition-delay:transition 9000s;
-transition:width 2s;
+  
+  
+  &:hover{
+    transition-delay: 1s ;
+    transition-timing-function: ease-in-out;
+    transition-duration: 1.9s;
+    transition-property: all;
+    z-index: 99; 
+    box-shadow: 0px 2px 15px 0px rgba(255,255,255,0.07);
+margin-right: 2rem;
 
-        width: 28vw;
-
-    }
     
-    .info{
-        transition:opacity  20s linear;
-       // 
-        display: flex;
-       opacity: 100%;
-  }
- } */
- 
-.info{
-    transition:opacity 2s;
-   
-opacity: 0%;
-}
->img{
-   
+  >img{ 
+    transition-delay: 1s ;
+    transition-timing-function: ease-in-out;
+    transition-duration: 1.9s;
+    transition-property: all;
     width: 25vw;
+  }
+    
+  .info{
+    transition-delay: 1s ;
+    transition-timing-function: ease-in-out;
+    transition-duration: 1.9s;
+    transition-property: all;
+    
+    visibility: visible;
+    overflow: auto;
+    opacity: 1;
+  }
 }
-`;
+
+  >img{
+    width: 22vw;
+  }
+  
+`
 
 
 export const InfoHover = styled.div`
-
-padding: 12px;
-display: none;
-align-items: flex-start;
-width: 100%;
-height:25vh;
-
-background-color: #212121;
-
-
-
-
-` 
+  
+  opacity: 0;
+  padding: 12px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height:20vh;
+  background-color: #212121;
+  visibility: hidden;
+  overflow: hidden;
+`  

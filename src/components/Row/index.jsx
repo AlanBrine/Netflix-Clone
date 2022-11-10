@@ -1,35 +1,41 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { GetMovies } from "../../assets/Apis/Api";
-import { Container, Catalog, Swipers } from "./styles";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Container, Catalog, Swipers, BtnLeft, BtnRight } from "./styles";
+
 import ItemsRow from "../ItemsRow";
 
 function Row({ title, path }) {
   const Swipe= useRef(null);
-  const Withd= useRef(null);
-  const [itemsNumber, setItemsNumber] = useState(0);
 
+  const [itemsNumber, setItemsNumber] = useState(0);
+  const [indiceBanner, setIndice] = useState(0)
+  
+  useEffect(()=>{
+  setIndice(Math.floor(Math.random() * 15))
+ },[])
   const handlleSwipe = (direction) => {
-    let slide = (26 * Withd.current.getBoundingClientRect().width/100 * 2.76)
-    let distance =  Swipe.current.getBoundingClientRect().x  
+    let slide = (69 * Swipe.current.getBoundingClientRect().width/100 )
+    
     if(direction === "left" && itemsNumber > 0) {
+      
+      Swipe.current.scrollLeft -= slide
+
       setItemsNumber(itemsNumber - 1);
-      Swipe.current.style.transform = `translateX(${ slide + distance }px)`;
-      console.log("foi")
     }else
     if(direction === "right" && itemsNumber < 6) { 
+      
+      Swipe.current.scrollLeft += slide
       setItemsNumber(itemsNumber + 1);
-      Swipe.current.style.transform = `translateX(${-slide + distance }px)`;
     }
     
   };
 
   return (
     <>
-      <Container ref={Withd}>
+      <Container >
         <h2>{title}</h2>
         <Swipers >
-          <FaChevronRight
+          <BtnRight
             className={`icon right ${itemsNumber === 6 ?"visible": " "}`}
             onClick={() => {
               handlleSwipe("right");
@@ -47,7 +53,7 @@ function Row({ title, path }) {
             ))}
           </Catalog>
 
-          <FaChevronLeft
+          <BtnLeft
             className={` ${itemsNumber === 0 ?"visible": " "}   icon left `}
             onClick={() => {
               handlleSwipe("left");
@@ -60,3 +66,4 @@ function Row({ title, path }) {
 }
 
 export default Row;
+
